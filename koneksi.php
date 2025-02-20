@@ -5,7 +5,7 @@ class database{
     var $username = "root";
     var $password = "";
     var $database = "sekolah";
-}
+    
     function __construct(){
         $this->koneksi = mysqli_connect(
             $this->host, $this->username, $this->password);
@@ -16,5 +16,7 @@ class database{
         }else{
             echo "Database tidak terhubung";
         }
+}
+    
     }
 ?>
