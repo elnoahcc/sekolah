@@ -26,10 +26,17 @@ class database{
     }
     public function tampil_data_show_siswa() {
         $data = [];
-        $query = "SELECT siswa.*, kodejurusan.namajurusan, kodeagama.namaagama 
-                  FROM siswa 
-                  LEFT JOIN kodejurusan ON siswa.kodejurusan = kodejurusan.kodejurusan 
-                  LEFT JOIN kodeagama ON siswa.agama = kodeagama.kodeagama";
+        $query = "
+        SELECT siswa.*, 
+            CASE
+                WHEN siswa.jeniskelamin='L' THEN 'Laki-laki'
+                ELSE 'Perempuan'
+            END as jeniskelamin,
+            kodejurusan.namajurusan, 
+            kodeagama.namaagama 
+        FROM siswa 
+        LEFT JOIN kodejurusan ON siswa.kodejurusan = kodejurusan.kodejurusan 
+        LEFT JOIN kodeagama ON siswa.agama = kodeagama.kodeagama";
     
         $result = mysqli_query($this->koneksi, $query);
         while ($row = mysqli_fetch_assoc($result)) {
