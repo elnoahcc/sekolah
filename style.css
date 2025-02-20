@@ -1,0 +1,104 @@
+/* Reset dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+header {
+    width: 100%;
+    background: #6e8efb;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+table thead {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #e3e3e3;
+    cursor: pointer;
+}
+
+td.options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+td a {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+td a:first-child {
+    background: #4CAF50;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: white;
+}
+
+td a:last-child {
+    background: #f44336;
+    color: white;
+}
+
+td a:hover {
+    opacity: 0.8;
+}
+
+a.tambah-data {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+a.tambah-data:hover {
+    background: #0056b3;
+}
