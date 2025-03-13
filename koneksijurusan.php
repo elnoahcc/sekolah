@@ -10,6 +10,7 @@ class databasejurusan{
             $this->host,
             $this->user, 
             $this->password,
+            $this->database
         );
 
         $cekdb = mysqli_select_db(

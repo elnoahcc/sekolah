@@ -31,6 +31,6 @@ $db = new databaseagama();
             </tr>
         <?php } ?>
     </table>
-    <a href="Tambah.php">Tambah Data Siswa</a>
+    <a href="tambah_siswa.php">Tambah Data Siswa</a>
 </body>
 </html>

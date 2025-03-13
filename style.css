@@ -1,104 +1,57 @@
-/* Reset dasar */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
 body {
-    background-color: #f4f4f9;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    min-height: 100vh;
-    padding: 20px;
+    height: 100vh;
+    margin: 0;
 }
-
-header {
-    width: 100%;
-    background: #6e8efb;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 24px;
-    font-weight: bold;
+.container {
+    max-width: 800px;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
 table {
     width: 100%;
-    max-width: 1000px;
     border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-
-table th, table td {
-    padding: 12px 15px;
-    text-align: center;
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
 }
-
-table thead {
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
+th {
+    background-color: rgb(0, 0, 0);
     color: white;
-    font-weight: bold;
 }
-
-table tbody tr:nth-child(even) {
+tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-
-table tbody tr:hover {
-    background-color: #e3e3e3;
-    cursor: pointer;
-}
-
-td.options {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-td a {
-    text-decoration: none;
-    padding: 6px 12px;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-td a:first-child {
-    background: #4CAF50;
-    margin-right: 5px;
-    margin-bottom: 5px;
+.button {
+    width: 100%;
+    background-color: #3273dc;
     color: white;
-}
-
-td a:last-child {
-    background: #f44336;
-    color: white;
-}
-
-td a:hover {
-    opacity: 0.8;
-}
-
-a.tambah-data {
-    display: inline-block;
-    margin-top: 15px;
     padding: 10px 20px;
-    background: #007BFF;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
     transition: 0.3s;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
-
-a.tambah-data:hover {
-    background: #0056b3;
+.button:hover {
+    background-color: #2759a5;
+}
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #3273dc;
 }

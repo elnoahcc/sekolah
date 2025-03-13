@@ -44,7 +44,17 @@ class database{
         }
         return $data;
     }
-}
+
+    function tambah_siswa($nisn, $nama, $jeniskelamin, $jurusan, $kelas, $alamat, $agama, $nohp) {
+        $query = "INSERT INTO siswa (nisn, nama, jeniskelamin, kodejurusan, kelas, alamat, agama, nohp) VALUES ('$nisn', '$nama', '$jeniskelamin', '$jurusan', '$kelas', '$alamat', '$agama', '$nohp')";
+        mysqli_query($this->koneksi, "insert into siswa (nisn, nama, jeniskelamin, kodejurusan, kelas, alamat, agama, nohp) values ('$nisn', '$nama', '$jeniskelamin', '$jurusan', '$kelas', '$alamat', '$agama', '$nohp')");
+        header("Location: data_siswa.php");
+        exit();
+    }
+        
+        
 
 
-?>
+
+    }
+    ?>

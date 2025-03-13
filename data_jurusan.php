@@ -31,6 +31,6 @@ $db = new databasejurusan();
             </tr>
         <?php } ?>
     </table>
-    <a href="Tambah.php">Tambah Data Siswa</a>
+    <a href="tambah_jurusan.php">Tambah Data Jurusan</a>
 </body>
 </html>
