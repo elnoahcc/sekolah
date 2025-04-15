@@ -1,6 +1,6 @@
 <?php
-include "koneksijurusan.php";
-$db = new databasejurusan();
+include "koneksi.php";
+$db = new database();
 ?>
 
 <!doctype html>
@@ -66,7 +66,7 @@ $db = new databasejurusan();
                 <i class="bi bi-list"></i>
               </a>
             </li>
-            <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Home</a></li>
+            <li class="nav-item d-none d-md-block"><a href="index.php" class="nav-link">Home</a></li>
             <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contact</a></li>
           </ul>
           <!--end::Start Navbar Links-->
@@ -212,7 +212,7 @@ $db = new databasejurusan();
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
-                <span class="d-none d-md-inline">Alexander Pierce</span>
+                <span class="d-none d-md-inline">Elnoah Agustinus</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
@@ -223,8 +223,8 @@ $db = new databasejurusan();
                     alt="User Image"
                   />
                   <p>
-                    Alexander Pierce - Web Developer
-                    <small>Member since Nov. 2023</small>
+                    Elnoah Agustinus
+                    <small>Administrator</small>
                   </p>
                 </li>
                 <!--end::User Image-->
@@ -260,65 +260,164 @@ $db = new databasejurusan();
         <!--begin::App Content Header-->
         <div class="app-content-header">
           <!--begin::Container-->
-          <button>
-            <a href="tambah_jurusan.php" class="btn btn-primary">Tambah Jurusan</a>
-          </button>
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Data Jurusan</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Tambah Data Siswa</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Data Jurusan</li>
+                  <li class="breadcrumb-item active" aria-current="page">Tambah Data Siswa</li>
                 </ol>
               </div>
             </div>
+            <div class="card card-info card-outline mb-4">
+                  <!--begin::Header-->
+                  <div class="card-header"><div class="card-title">Formulir Data Siswa</div></div>
+                  <!--end::Header-->
+                  <!--begin::Form-->
+                  <form class="needs-validation" novalidate>
+                    <!--begin::Body-->
+                    <div class="card-body">
+                      <!--begin::Row-->
+                      <div class="row g-3">
+                        <!--begin::Col-->
+                        <div class="col-md-6">
+                          <label for="nisn" class="form-label">NISN</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="nisn"
+                      
+                            required
+                          />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6">
+                          <label for="validationCustom02" class="form-label">Nama Lengkap</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="nama"
+                            required
+                          />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6">
+                          <label for="jeniskelamin" class="form-label">Jenis Kelamin</label>
+                          <div class="input-group has-validation">
+                            <input
+                              type="dropdown"
+                              class="form-control"
+                              id="validationCustomUsername"
+                              aria-describedby="inputGroupPrepend"
+                              required
+                            />
+                            <div class="invalid-feedback">Please choose a username.</div>
+                          </div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6">
+                          <label for="validationCustom03" class="form-label">City</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationCustom03"
+                            required
+                          />
+                          <div class="invalid-feedback">Please provide a valid city.</div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6">
+                          <label for="validationCustom04" class="form-label">State</label>
+                          <select class="form-select" id="validationCustom04" required>
+                            <option selected disabled value="">Choose...</option>
+                            <option>...</option>
+                          </select>
+                          <div class="invalid-feedback">Please select a valid state.</div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6">
+                          <label for="validationCustom05" class="form-label">Zip</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="validationCustom05"
+                            required
+                          />
+                          <div class="invalid-feedback">Please provide a valid zip.</div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-12">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="invalidCheck"
+                              required
+                            />
+                            <label class="form-check-label" for="invalidCheck">
+                              Agree to terms and conditions
+                            </label>
+                            <div class="invalid-feedback">You must agree before submitting.</div>
+                          </div>
+                        </div>
+                        <!--end::Col-->
+                      </div>
+                      <!--end::Row-->
+                    </div>
+                    <!--end::Body-->
+                    <!--begin::Footer-->
+                    <div class="card-footer">
+                      <button class="btn btn-info" type="submit">Submit form</button>
+                    </div>
+                    <!--end::Footer-->
+                  </form>
+                  <!--end::Form-->
+                  <!--begin::JavaScript-->
+                  <script>
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (() => {
+                      'use strict';
+
+                      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                      const forms = document.querySelectorAll('.needs-validation');
+
+                      // Loop over them and prevent submission
+                      Array.from(forms).forEach((form) => {
+                        form.addEventListener(
+                          'submit',
+                          (event) => {
+                            if (!form.checkValidity()) {
+                              event.preventDefault();
+                              event.stopPropagation();
+                            }
+
+                            form.classList.add('was-validated');
+                          },
+                          false,
+                        );
+                      });
+                    })();
+                  </script>
+                  <!--end::JavaScript-->
+                </div>
             <!--end::Row-->
           </div>
           <!--end::Container-->
         </div>
         <!--end::App Content Header-->
         <!--begin::App Content-->
-        <div class="app-content">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-md-12">
-                <!-- /.card -->
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-title">Data Jurusan</h3>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body p-0">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th style="width: 100px">#</th>
-                        
     
-    <th>Jurusan</th>     
-                          <th style="width: 900px">Label</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <?php
-$no = 1;
-foreach($db->tampil_data_show_jurusan() as $x){
-    ?>
-<tr>
-<td><?php echo $no++; ?></td>
-<td><?php echo isset($x['namajurusan']) ? $x['namajurusan'] : 'Tidak Diketahui'; ?></td>
-    <td>
-    <button href="edit_siswa.php?kodejurusan=<?php echo $x['kodejurusan']; ?>&aksi=edit">Edit</button>
-                <button href="proses.php?kodejurusan=<?php echo $x['kodejurusan']; ?>&aksi=Hapus">Hapus</button>
-        </td>
-        </tr>
-        <?php
-        }
-        ?>
                       </tbody>
                     </table>
                   </div>

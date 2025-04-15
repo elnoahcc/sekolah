@@ -16,11 +16,7 @@ class databasejurusan{
         $cekdb = mysqli_select_db(
             $this->koneksi, $this->database);
         
-        if($cekdb){
-            echo "Koneksi ke database berhasil";
-        }else{
-            echo "Koneksi ke database gagal";
-        }
+        
 
         
     }

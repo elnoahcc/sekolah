@@ -47,7 +47,7 @@ $db = new database();
     />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="../../../dist/css/adminlte.css" />
+    <link rel="stylesheet" href="dist/css/adminlte.css" />
     <!--end::Required Plugin(AdminLTE)-->
   </head>
   <!--end::Head-->
@@ -269,6 +269,7 @@ $db = new database();
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Data Siswa</li>
                 </ol>
+                
               </div>
             </div>
             <!--end::Row-->
@@ -287,6 +288,9 @@ $db = new database();
                 <div class="card mb-4">
                   <div class="card-header">
                     <h3 class="card-title">Data Siswa</h3>
+                    <button href>
+              <a href="tambahsiswa.php" class="btn btn-primary">Tambah Data Siswa</a>
+            </button>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body p-0">
@@ -322,8 +326,8 @@ foreach($db ->tampil_data_show_siswa() as $X){
     <td><?php echo $X['nohp'];?></td>
 
     <td>
-    <a href="edit_siswa.php?nisn=<?php echo $X['nisn']; ?>&aksi=edit">Edit</a>
-                <a href="proses.php?nisn=<?php echo $X['nisn']; ?>&aksi=Hapus">Hapus</a>
+    <button href="edit_siswa.php?nisn=<?php echo $X['nisn']; ?>&aksi=edit">Edit</button>
+                <button href="proses.php?nisn=<?php echo $X['nisn']; ?>&aksi=Hapus">Hapus</button>
         </td>
         </tr>
         <?php
