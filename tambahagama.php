@@ -1,13 +1,25 @@
 <?php
 include "koneksi.php";
 $db = new database();
+
+if (isset($_POST['simpan'])) { 
+$db->tambah_agama(
+        $_POST['kodeagama'],
+        $_POST['namaagama'],
+       
+    );
+    
+    header("Location: data_agama.php");
+}
+
 ?>
+
 <!doctype html>
 <html lang="en">
   <!--begin::Head-->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AdminLTE 4 | Simple Tables</title>
+    <title>Tambah Agama</title>
     <!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="AdminLTE 4 | Simple Tables" />
@@ -65,7 +77,7 @@ $db = new database();
                 <i class="bi bi-list"></i>
               </a>
             </li>
-            <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Home</a></li>
+            <li class="nav-item d-none d-md-block"><a href="index.php" class="nav-link">Home</a></li>
             <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contact</a></li>
           </ul>
           <!--end::Start Navbar Links-->
@@ -90,7 +102,7 @@ $db = new database();
                   <div class="d-flex">
                     <div class="flex-shrink-0">
                       <img
-                        src="dist/assets/img/user1-128x128.jpg"
+                        src="../../../dist/assets/img/user1-128x128.jpg"
                         alt="User Avatar"
                         class="img-size-50 rounded-circle me-3"
                       />
@@ -207,23 +219,23 @@ $db = new database();
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <img
-                  src="dist/assets/img/user2-160x160.jpg"
+                  src="../../../dist/assets/img/user2-160x160.jpg"
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
-                <span class="d-none d-md-inline">Alexander Pierce</span>
+                <span class="d-none d-md-inline">Elnoah Agustinus</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
                 <li class="user-header text-bg-primary">
                   <img
-                    src="dist/assets/img/user2-160x160.jpg"
+                    src="../../../dist/assets/img/user2-160x160.jpg"
                     class="rounded-circle shadow"
                     alt="User Image"
                   />
                   <p>
-                    Alexander Pierce - Web Developer
-                    <small>Member since Nov. 2023</small>
+                    Elnoah Agustinus
+                    <small>Administrator</small>
                   </p>
                 </li>
                 <!--end::User Image-->
@@ -253,83 +265,96 @@ $db = new database();
         <!--end::Container-->
       </nav>
       <!--end::Header-->
-      <?php include "Sidebar.php"; ?>
+      <?php include "sidebar.php"; ?>
       <!--begin::App Main-->
       <main class="app-main">
+        
         <!--begin::App Content Header-->
         <div class="app-content-header">
           <!--begin::Container-->
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Data Siswa</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Tambah Data Agama</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Simple Tables</li>
+                  <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Tambah Data Agama</li>
                 </ol>
               </div>
+              <div class="col-12">
+                <div class="callout callout-info">
+                  Mohon isi data dengan huruf kapital.
+                  <br />
+                  <strong>Note:</strong> Formulir ini menggunakan
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/forms/overview/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="callout-link"
+                  >
+                    Bootstrap Form
+                  </a>
+                </div>
+              </div>
             </div>
-            <!--end::Row-->
-          </div>
+            <div class="card card-info card-outline mb-4">
+  <!--begin::Header-->
+  <div class="card-header">
+    <div class="card-title">Formulir Data Agama</div>
+  </div>
+  <!--end::Header-->  
+  <!--begin::Form-->
+        <form action=" " method="POST">
+  <!--begin::Body-->
+  <div class="card-body">
+    <div class="mb-3">
+      <label for="kodeagama" class="form-label">Kode Agama</label>
+      <input type="text" class="form-control" id="kodeagama" name="kodeagama" required />
+    </div>  
+    <div class="mb-3">
+      <label for="namaagama" class="form-label">Nama Agama</label>
+      <input type="text" class="form-control" id="namaagama" name="namaagama" required />
+    </div>
+
+    
+            <input href="dataagama.php" type="submit" name="simpan" value="Tambah Agama" class="submit-button">
+        </form>
+    <!--end::Footer-->
+  </form>
+  <!--end::Form-->
+
+  <!--begin::JavaScript-->
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+      'use strict';
+      const forms = document.querySelectorAll('.needs-validation');
+
+      Array.from(forms).forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+  <!--end::JavaScript-->
+</div>
+
           <!--end::Container-->
         </div>
         <!--end::App Content Header-->
         <!--begin::App Content-->
-        <div class="app-content">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-md-12">
-              <div class="card mb-">
-                  <div class="card-header">
-                    <h3 class="card-title">Striped Full Width Table</h3>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body p-0">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>NISN</th>
-                          <th>Nama</th>
-                          <th>Jenis Kelamin</th>
-                          <th>Jurusan</th>
-                          <th>Kelas</th>
-                          <th>Alamat</th>
-                          <th>Agama</th>
-                          <th>No HP</th>
-                          <th>Opsi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <?php
-        $no = 1;
-        foreach ($db->tampil_data_show_siswa() as $x) {
-        ?>
-            <tr>
-                <td><?php echo $no++; ?></td>
-                <td><?php echo $x['nisn']; ?></td>
-                <td><?php echo $x['nama']; ?></td>
-                <td><?php echo ($x['jeniskelamin'] == 'L') ? 'Laki-laki' : 'Perempuan'; ?></td>
-                <td><?php echo isset($x['namajurusan']) ? $x['namajurusan'] : 'Tidak Diketahui'; ?></td>
-                <td><?php echo $x['kelas']; ?></td>
-                <td><?php echo $x['alamat']; ?></td>
-                <td><?php echo isset($x['namaagama']) ? $x['namaagama'] : 'Tidak Diketahui'; ?></td>
-                <td><?php echo $x['nohp']; ?></td>
-                <td>
-                    <a href="edit_siswa.php?idsiswa=<?php echo $x['idsiswa']; ?>&aksi=edit" class="edit">Edit</a>
-                    <a href="proses.php?idsiswa=<?php echo $x['idsiswa']; ?>&aksi=hapus" class="hapus">Hapus</a>
-                </td>
-            </tr>
-        <?php } ?>
+    
                       </tbody>
                     </table>
                   </div>
                   <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
                 <!-- /.card -->
               </div>
               <!-- /.col -->
@@ -337,7 +362,7 @@ $db = new database();
             <!--end::Row-->
           </div>
           <!--end::Container-->
-        </div>  
+        </div>
         <!--end::App Content-->
       </main>
       <!--end::App Main-->

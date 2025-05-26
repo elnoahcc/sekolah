@@ -1,6 +1,6 @@
 <?php
-include "koneksiagama.php";
-$db = new databaseagama();
+include "koneksi.php";
+$db = new database();
 ?>
 
 <!doctype html>
@@ -8,7 +8,7 @@ $db = new databaseagama();
   <!--begin::Head-->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AdminLTE 4 | Simple Tables</title>
+    <title>Data Agama</title>
     <!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="AdminLTE 4 | Simple Tables" />
@@ -287,6 +287,9 @@ $db = new databaseagama();
                 <div class="card mb-4">
                   <div class="card-header">
                     <h3 class="card-title">Data Agama</h3>
+                    <a href="tambahagama.php" class="btn btn-primary float-end">
+                      Tambah Agama
+                    </a>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body p-0">
@@ -295,7 +298,7 @@ $db = new databaseagama();
                         <tr>
                           <th style="width: 100px">No</th>                      
                       
-    <th>Agama</th>                       
+                          <th>Agama</th>                       
                           <th style="width: 900px">Opsi</th>
                         </tr>
                       </thead>
@@ -311,8 +314,8 @@ foreach($db ->tampil_data_show_agama() as $X){
 
 
     <td>
-    <a href="edit_siswa.php?idagama=<?php echo $x['idagama']; ?>&aksi=edit">Edit</a>
-                <a href="proses.php?idagama=<?php echo $x['idagama']; ?>&aksi=Hapus">Hapus</a>
+    <button class="btn btn-warning mb-2" href="edit_siswa.php?idagama=<?php echo $x['idagama']; ?>&aksi=edit">Edit</button>
+                <button class="btn btn-danger mb-2"" href="proses.php?idagama=<?php echo $x['idagama']; ?>&aksi=Hapus">Hapus</button>
         </td>
         </tr>
         <?php
