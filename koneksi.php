@@ -1,5 +1,7 @@
 <?php
 
+if (!class_exists('database')) {
+
 class database{
     var $host = "localhost";
     var $user = "root";
@@ -16,8 +18,20 @@ class database{
     
         if (!$this->koneksi) {
             die("Koneksi database gagal: " . mysqli_connect_error());
-        }
+}
+}
+
+public function update_data_jurusan($kodejurusan, $namajurusan) {
+    $query = "UPDATE kodejurusan SET 
+              namajurusan='$namajurusan' 
+              WHERE kodejurusan='$kodejurusan'";
+    mysqli_query($this->koneksi, $query);
+    if (mysqli_affected_rows($this->koneksi) > 0) {
+        return true; // Update successful
+    } else {
+        return false; // Update failed
     }
+}
     
     public function tampil_data_show_siswa() {
         $data = [];
@@ -103,8 +117,36 @@ class database{
     
         return $result;
     }
-    
-    
+    public function update_data_siswa($nisn, $nama, $jeniskelamin, $kelas, $alamat, $nohp, $jurusan, $agama) {
+        $query = "UPDATE siswa SET 
+                  nama='$nama', 
+                  jeniskelamin='$jeniskelamin', 
+                  kelas='$kelas', 
+                  alamat='$alamat', 
+                  nohp='$nohp',
+                  kodejurusan='$jurusan',
+                  agama='$agama'
+                  WHERE nisn='$nisn'";
+        mysqli_query($this->koneksi, $query);
+        if (mysqli_affected_rows($this->koneksi) > 0) {
+            return true; // Update successful
+        } else {
+            return false; // Update failed
+        }       
+    }
+
+    public function update_data_agama($kodeagama, $namaagama) {
+        $query = "UPDATE kodeagama SET 
+                  namaagama='$namaagama' 
+                  WHERE kodeagama='$kodeagama'";
+        mysqli_query($this->koneksi, $query);
+        if (mysqli_affected_rows($this->koneksi) > 0) {
+            return true; // Update successful
+        } else {
+            return false; // Update failed
+        }
+    }
+}
 }
 
-?>
+   

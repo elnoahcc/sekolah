@@ -1,7 +1,26 @@
 <?php
 include "koneksi.php";
 $db = new database();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nisn = $_POST['nisn'];
+    $nama = $_POST['nama'];
+    $jeniskelamin = $_POST['jeniskelamin'];
+    $kelas = $_POST['kelas'];
+    $alamat = $_POST['alamat'];
+    $nohp = $_POST['nohp'];
+    $jurusan = $_POST['jurusan'];
+    $agama = $_POST['agama'];
+
+    // Pastikan kamu punya method update di class database()
+    $db->update_data_siswa($nisn, $nama, $jeniskelamin, $kelas, $alamat, $nohp, $jurusan, $agama);
+
+    // Redirect biar gak nge-submit ulang kalo refresh
+    header("Location: datasiswa.php");
+    exit();
+}
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -21,6 +40,12 @@ $db = new database();
       name="keywords"
       content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard"
     />
+
+    <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap JS (modal butuh JS) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
     <link
@@ -134,8 +159,123 @@ foreach($db ->tampil_data_show_siswa() as $X){
     <td><?php echo $X['nohp'];?></td>
 
     <td>
-    <button class="btn btn-warning mb-2"href="edit_siswa.php?nisn=<?php echo $X['nisn']; ?>&aksi=edit">Edit</button>
-                <button class="btn btn-danger mb-2" href="proses.php?nisn=<?php echo $X['nisn']; ?>&aksi=Hapus">Hapus</button>
+<!-- Tombol Edit (trigger modal) -->
+<button class="btn btn-warning mb-2" 
+        data-bs-toggle="modal" 
+        data-bs-target="#modalEdit<?= $X['nisn']; ?>">
+  Edit
+</button>
+
+<!-- Modal Edit -->
+<div class="modal fade" id="modalEdit<?= $X['nisn']; ?>" 
+     data-bs-backdrop="static" 
+     data-bs-keyboard="false" 
+     tabindex="-1" 
+     aria-labelledby="labelEdit<?= $X['nisn']; ?>" 
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form action="" method="POST">
+        <div class="modal-header bg-warning">
+          <h5 class="modal-title" id="labelEdit<?= $X['nisn']; ?>">Edit Data Siswa</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="nisn" value="<?= $X['nisn']; ?>">
+          <div class="mb-3">
+            <label for="nama<?= $X['nisn']; ?>" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="nama<?= $X['nisn']; ?>" name="nama" value="<?= $X['nama']; ?>" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Jenis Kelamin</label>
+            <select name="jeniskelamin" class="form-select">
+              <option value="L" <?= $X['jeniskelamin'] == 'L' ? 'selected' : '' ?>>Laki-laki</option>
+              <option value="P" <?= $X['jeniskelamin'] == 'P' ? 'selected' : '' ?>>Perempuan</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Jurusan</label>
+            <select name="jurusan" class="form-select" required>
+              <?php foreach ($db->tampil_data_show_jurusan() as $jur) : ?>
+                <option value="<?= $jur['kodejurusan']; ?>" <?= $jur['kodejurusan'] == $X['kodejurusan'] ? 'selected' : ''; ?>>
+                  <?= $jur['namajurusan']; ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Kelas</label>
+            <input type="text" class="form-control" name="kelas" value="<?= $X['kelas']; ?>" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Alamat</label>
+            <input type="text" class="form-control" name="alamat" value="<?= $X['alamat']; ?>">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Agama</label>
+            <select name="agama" class="form-select" required>
+              <?php foreach ($db->tampil_data_show_agama() as $agm) : ?>
+                <option value="<?= $agm['kodeagama']; ?>" <?= $agm['kodeagama'] == $X['agama'] ? 'selected' : ''; ?>>
+                  <?= $agm['namaagama']; ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">No HP</label>
+            <input type="text" class="form-control" name="nohp" value="<?= $X['nohp']; ?>">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-warning">Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Tombol Hapus (triger modal) -->
+<button class="btn btn-danger mb-2" 
+        data-bs-toggle="modal" 
+        data-bs-target="#modalHapus<?= $X['nisn']; ?>">
+  Hapus
+</button>
+<!-- Modal Konfirmasi -->
+<div class="modal fade" id="modalHapus<?= $X['nisn']; ?>" 
+     data-bs-backdrop="static" 
+     data-bs-keyboard="false" 
+     tabindex="-1" 
+     aria-labelledby="labelHapus<?= $X['nisn']; ?>" 
+     aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="labelHapus<?= $X['nisn']; ?>">Konfirmasi Hapus</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Yakin ingin menghapus data siswa ini?</p>
+        <ul class="list-unstyled">
+          <li><strong>NISN:</strong> <?= $X['nisn']; ?></li>
+          <li><strong>Nama:</strong> <?= $X['nama']; ?></li>
+          <li><strong>Jenis Kelamin:</strong> <?= $X['jeniskelamin']; ?></li>
+          <li><strong>Jurusan:</strong> <?= $X['namajurusan']; ?></li>
+          <li><strong>Kelas:</strong> <?= $X['kelas']; ?></li>
+          <li><strong>Alamat:</strong> <?= $X['alamat']; ?></li>
+          <li><strong>Agama:</strong> <?= $X['namaagama']; ?></li>
+          <li><strong>No HP:</strong> <?= $X['nohp']; ?></li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <a href="hapus_siswa.php?nisn=<?= $X['nisn']; ?>" class="btn btn-danger">Hapus</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
         </td>
         </tr>
         <?php
@@ -158,18 +298,7 @@ foreach($db ->tampil_data_show_siswa() as $X){
       </main>
       <!--end::App Main-->
       <!--begin::Footer-->
-      <footer class="app-footer">
-        <!--begin::To the end-->
-        <div class="float-end d-none d-sm-inline">Anything you want</div>
-        <!--end::To the end-->
-        <!--begin::Copyright-->
-        <strong>
-          Copyright &copy; 2014-2024&nbsp;
-          <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
-        </strong>
-        All rights reserved.
-        <!--end::Copyright-->
-      </footer>
+     <?php include "footer.php"; ?>
       <!--end::Footer-->
     </div>
     <!--end::App Wrapper-->
@@ -213,7 +342,7 @@ foreach($db ->tampil_data_show_siswa() as $X){
             },
           });
         }
-      });
+      });3
     </script>
     <!--end::OverlayScrollbars Configure-->
     <!--end::Script-->
