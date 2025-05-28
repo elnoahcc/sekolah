@@ -2,16 +2,14 @@
 include "koneksi.php";
 $db = new database();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_jurusan'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kodejurusan = $_POST['kodejurusan'];
     $namajurusan = $_POST['namajurusan'];
 
-    // Assuming you have a method update_data_jurusan in your database class
-    if (method_exists($db, 'update_data_jurusan')) {
-        $db->update_data_jurusan($kodejurusan, $namajurusan);
-    }
+    // Pastikan kamu punya method update di class database()
+    $db->update_data_jurusan($kodejurusan, $namajurusan);
 
-    // Redirect to avoid resubmission
+    // Redirect biar gak nge-submit ulang kalo refresh
     header("Location: datajurusan.php");
     exit();
 }
@@ -19,80 +17,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_jurusan'])) {
 
 <!doctype html>
 <html lang="en">
-  <!--begin::Head-->
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Data Jurusan</title>
-    <!--begin::Primary Meta Tags-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="title" content="AdminLTE 4 | Simple Tables" />
-    <meta name="author" content="ColorlibHQ" />
-    <meta
-      name="description"
-      content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS."
-    />
-    <meta
-      name="keywords"
-      content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard"
-    />
-    <!--end::Primary Meta Tags-->
-    <!--begin::Fonts-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
-      integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q="
-      crossorigin="anonymous"
-    />
-    <!--end::Fonts-->
-    <!--begin::Third Party Plugin(OverlayScrollbars)-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css"
-      integrity="sha256-tZHrRjVqNSRyWg2wbppGnT833E/Ys0DHWGwT04GiqQg="
-      crossorigin="anonymous"
-    />
-    <!--end::Third Party Plugin(OverlayScrollbars)-->
-    <!--begin::Third Party Plugin(Bootstrap Icons)-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-      integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
-      crossorigin="anonymous"
-    />
-    <!--end::Third Party Plugin(Bootstrap Icons)-->
-    <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="dist/css/adminlte.css" />
-    <!--end::Required Plugin(AdminLTE)-->
-  </head>
-  <!--end::Head-->
-  <!--begin::Body-->
-  <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    <!--begin::App Wrapper-->
-    <div class="app-wrapper">
-      <!--begin::Header-->
-    <?php include "navbar.php"?>
-      <!--end::Header-->
-      <?php include "sidebar.php"; ?>
-      <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Data Jurusan</h3></div>
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Simple Tables</li>
-                </ol>
-              </div>
-            </div>
-            <!--end::Row-->
+<head>
+  <meta charset="utf-8" />
+  <title>Data Jurusan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="AdminLTE is a Free Bootstrap 5 Admin Dashboard" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="dist/css/adminlte.css" />
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+<?php include "navbar.php"; ?>
+<?php include "sidebar.php"; ?>
+<div class="content-wrapper">
+  <main class="app-main">
+    <div class="app-content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6"><h3>Data Jurusan</h3></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-end">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Data Jurusan</li>
+            </ol>
           </div>
-          <!--end::Container-->
         </div>
+      </div>
+    </div>
         <!--end::App Content Header-->
         <!--begin::App Content-->
         <div class="app-content">
@@ -101,108 +52,131 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_jurusan'])) {
             <!--begin::Row-->
             <div class="row">
               <div class="col-md-12">
-              <div class="card mb-">
+                <!-- /.card -->
+                <div class="card mb-4">
                   <div class="card-header">
-                    <h3 class="card-title">Table Jurusan</h3>
+                    <h3 class="card-title">Data Jurusan</h3>
+                    <?php 
+                    // Cek apakah user yang login bukan siswa
+                    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'siswa') : 
+                    ?>
+                    <a href="tambahjurusan.php" class="btn btn-primary float-end">
+                      Tambah Data
+                    </a>
+                    <?php endif; ?>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body p-0">
                     <table class="table table-striped">
                       <thead>
-                      <tr>
-            <th>Kode Jurusan</th>
-            <th>Nama Jurusan</th>
-            <th>Option</th>
-        </tr>
+                        <tr>
+                          <th style="width: 10px">No.</th>
+                          <th bgcolor="Green">Kode Jurusan</th>
+                          <th bgcolor="Green">Nama Jurusan</th>
+                          <th style="width: 40px">Opsi</th>
+                        </tr>
                       </thead>
                       <tbody>
-                      <?php
-        foreach ($db->tampil_data_show_jurusan() as $x) {
-        ?>
-            <tr>
-                <td><?php echo $x['kodejurusan']; ?></td>
-                <td><?php echo $x['namajurusan']; ?></td>
-                <td>
-                    <!-- Tombol Edit (trigger modal) -->
-                    <button class="btn btn-warning mb-2" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#modalEdit<?= $x['kodejurusan']; ?>">
-                        Edit
-                    </button>
+                        <?php
+$no = 1;
+foreach($db->tampil_data_show_jurusan() as $X){
+    ?>
+ <tr class="align-middle">
+    <td><?php echo $no++; ?></td>
+    <td><?php echo $X['kodejurusan'];?></td>
+    <td><?php echo $X['namajurusan'];?></td>
 
-                    <!-- Modal Edit -->
-                    <div class="modal fade" id="modalEdit<?= $x['kodejurusan']; ?>" 
-                         data-bs-backdrop="static" 
-                         data-bs-keyboard="false" 
-                         tabindex="-1" 
-                         aria-labelledby="labelEdit<?= $x['kodejurusan']; ?>" 
-                         aria-hidden="true">
-                      <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                          <form action="datajurusan.php" method="POST">
-                            <div class="modal-header bg-warning">
-                              <h5 class="modal-title" id="labelEdit<?= $x['kodejurusan']; ?>">Edit Data Jurusan</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <input type="hidden" name="kodejurusan" value="<?= $x['kodejurusan']; ?>">
-                              <div class="mb-3">
-                                <label for="namajurusan<?= $x['kodejurusan']; ?>" class="form-label">Nama Jurusan</label>
-                                <input type="text" class="form-control" id="namajurusan<?= $x['kodejurusan']; ?>" name="namajurusan" value="<?= $x['namajurusan']; ?>" required>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                              <button type="submit" class="btn btn-warning" name="update_jurusan">Simpan Perubahan</button>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
+    <td>
+<?php 
+// Cek apakah user yang login bukan siswa untuk menampilkan tombol Edit dan Hapus
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'siswa') : 
+?>
+<!-- Tombol Edit (trigger modal) -->
+<button class="btn btn-warning mb-2" 
+        data-bs-toggle="modal" 
+        data-bs-target="#modalEdit<?= $X['kodejurusan']; ?>">
+  Edit
+</button>
 
-                    <!-- Tombol Hapus (trigger modal) -->
-                    <button class="btn btn-danger mb-2" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#modalHapus<?= $x['kodejurusan']; ?>">
-                      Hapus
-                    </button>
+<!-- Modal Edit -->
+<div class="modal fade" id="modalEdit<?= $X['kodejurusan']; ?>" 
+     data-bs-backdrop="static" 
+     data-bs-keyboard="false" 
+     tabindex="-1" 
+     aria-labelledby="labelEdit<?= $X['kodejurusan']; ?>" 
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="" method="POST">
+        <div class="modal-header bg-warning">
+          <h5 class="modal-title" id="labelEdit<?= $X['kodejurusan']; ?>">Edit Data Jurusan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="kodejurusan" value="<?= $X['kodejurusan']; ?>">
+          <div class="mb-3">
+            <label for="namajurusan<?= $X['kodejurusan']; ?>" class="form-label">Nama Jurusan</label>
+            <input type="text" class="form-control" id="namajurusan<?= $X['kodejurusan']; ?>" name="namajurusan" value="<?= $X['namajurusan']; ?>" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-warning">Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-                    <!-- Modal Konfirmasi Hapus -->
-                    <div class="modal fade" id="modalHapus<?= $x['kodejurusan']; ?>" 
-                         data-bs-backdrop="static" 
-                         data-bs-keyboard="false" 
-                         tabindex="-1" 
-                         aria-labelledby="labelHapus<?= $x['kodejurusan']; ?>" 
-                         aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header bg-danger text-white">
-                            <h5 class="modal-title" id="labelHapus<?= $x['kodejurusan']; ?>">Konfirmasi Hapus</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <p>Yakin ingin menghapus data jurusan ini?</p>
-                            <ul class="list-unstyled">
-                              <li><strong>Kode Jurusan:</strong> <?= $x['kodejurusan']; ?></li>
-                              <li><strong>Nama Jurusan:</strong> <?= $x['namajurusan']; ?></li>
-                            </ul>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <a href="hapus_jurusan.php?kodejurusan=<?= $x['kodejurusan']; ?>" class="btn btn-danger">Hapus</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </td>
-            </tr>
-        <?php } ?>
+<!-- Tombol Hapus (trigger modal) -->
+<button class="btn btn-danger mb-2" 
+        data-bs-toggle="modal" 
+        data-bs-target="#modalHapus<?= $X['kodejurusan']; ?>">
+  Hapus
+</button>
+
+<!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="modalHapus<?= $X['kodejurusan']; ?>" 
+     data-bs-backdrop="static" 
+     data-bs-keyboard="false" 
+     tabindex="-1" 
+     aria-labelledby="labelHapus<?= $X['kodejurusan']; ?>" 
+     aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="labelHapus<?= $X['kodejurusan']; ?>">Konfirmasi Hapus</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Yakin ingin menghapus data jurusan ini?</p>
+        <ul class="list-unstyled">
+          <li><strong>Kode Jurusan:</strong> <?= $X['kodejurusan']; ?></li>
+          <li><strong>Nama Jurusan:</strong> <?= $X['namajurusan']; ?></li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <a href="hapus_jurusan.php?kodejurusan=<?= $X['kodejurusan']; ?>" class="btn btn-danger">Hapus</a>
+      </div>
+    </div>
+  </div>
+</div>
+<?php else: ?>
+<!-- Jika user adalah siswa, tampilkan pesan atau tombol view saja -->
+<span class="text-muted">View Only</span>
+<?php endif; ?>
+
+        </td>
+        </tr>
+        <?php
+        }
+        ?> 
                       </tbody>
                     </table>
                   </div>
                   <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
                 <!-- /.card -->
               </div>
               <!-- /.col -->
@@ -210,13 +184,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_jurusan'])) {
             <!--end::Row-->
           </div>
           <!--end::Container-->
-        </div>  
+        </div>
         <!--end::App Content-->
       </main>
       <!--end::App Main-->
       <!--begin::Footer-->
-    <?php include "footer.php"; ?>
+     
+      <!--end::Footer-->
     </div>
+    <?php include "footer.php"; ?>
     <!--end::App Wrapper-->
     <!--begin::Script-->
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
