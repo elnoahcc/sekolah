@@ -26,3 +26,5 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-blue)](https://github.com/elnoahcc)
 
 Thanks for visiting my profile! Have a great day! 😊
+
+
