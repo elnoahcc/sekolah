@@ -4,13 +4,19 @@ $db = new database();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kodeagama = $_POST['kodeagama'];
-    $namaagama = $_POST['namaagama'];
+    $namaagama = isset($_POST['namaagama']) ? $_POST['namaagama'] : '';
 
-    // Pastikan kamu punya method update di class database()
-    $db->update_data_agama($kodeagama, $namaagama);
+    // Jika ada tombol hapus, panggil method hapus
+    if (isset($_POST['hapus_agama'])) {
+        $db->hapus_data_agama($kodeagama);
+    }
+    // Jika ada tombol edit, panggil method update
+    if (isset($_POST['edit_agama'])) {
+        $db->update_data_agama($kodeagama, $namaagama);
+    }
 
     // Redirect biar gak nge-submit ulang kalo refresh
-    header("Location: datagama.php");
+    header("Location: dataagama.php");
     exit();
 }
 ?>
@@ -35,12 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6"><h3>Data Agama</h3></div>
-          <div class="col-sm-6">
+            <div class="col-sm-6">
             <ol class="breadcrumb float-sm-end">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Agama</li>
-            </ol>
-          </div>
+              <li class="breadcrumb-item active">Data Agama</li> </ol>
+            </div>
         </div>
       </div>
     </div>
@@ -99,34 +104,29 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'siswa') :
 </button>
 
 <!-- Modal Edit -->
-<div class="modal fade" id="modalEdit<?= $X['kodeagama']; ?>" 
-     data-bs-backdrop="static" 
-     data-bs-keyboard="false" 
-     tabindex="-1" 
-     aria-labelledby="labelEdit<?= $X['kodeagama']; ?>" 
-     aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form action="" method="POST">
-        <div class="modal-header bg-warning">
-          <h5 class="modal-title" id="labelEdit<?= $X['kodeagama']; ?>">Edit Data Agama</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <input type="hidden" name="kodeagama" value="<?= $X['kodeagama']; ?>">
-          <div class="mb-3">
-            <label for="namaagama<?= $X['kodeagama']; ?>" class="form-label">Nama Agama</label>
-            <input type="text" class="form-control" id="namaagama<?= $X['kodeagama']; ?>" name="namaagama" value="<?= $X['namaagama']; ?>" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-warning">Simpan Perubahan</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+<div class="modal fade" id="modalEdit<?= $X['kodeagama']; ?>" tabindex="-1" aria-labelledby="labelEdit<?= $X['kodeagama']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <form method="POST">
+                                      <div class="modal-header bg-warning">
+                                        <h5 class="modal-title" id="labelEdit<?= $X['kodeagama']; ?>">Edit Data Agama</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <input type="hidden" name="kodeagama" value="<?= $X['kodeagama']; ?>">
+                                        <div class="mb-3">
+                                          <label for="namaagama<?= $X['kodeagama']; ?>" class="form-label">Nama Agama</label>
+                                          <input type="text" class="form-control" name="namaagama" value="<?= $X['namaagama']; ?>" required>
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" name="edit_agama" class="btn btn-warning">Simpan Perubahan</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
 
 <!-- Tombol Hapus (trigger modal) -->
 <button class="btn btn-danger mb-2" 
@@ -135,33 +135,31 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'siswa') :
   Hapus
 </button>
 
-<!-- Modal Konfirmasi Hapus -->
-<div class="modal fade" id="modalHapus<?= $X['kodeagama']; ?>" 
-     data-bs-backdrop="static" 
-     data-bs-keyboard="false" 
-     tabindex="-1" 
-     aria-labelledby="labelHapus<?= $X['kodeagama']; ?>" 
-     aria-hidden="true">
- <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title" id="labelHapus<?= $X['kodeagama']; ?>">Konfirmasi Hapus</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Yakin ingin menghapus data agama ini?</p>
-        <ul class="list-unstyled">
-          <li><strong>Kode Agama:</strong> <?= $X['kodeagama']; ?></li>
-          <li><strong>Nama Agama:</strong> <?= $X['namaagama']; ?></li>
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <a href="hapus_agama.php?kodeagama=<?= $X['kodeagama']; ?>" class="btn btn-danger">Hapus</a>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="modal fade" id="modalHapus<?= $X['kodeagama']; ?>" tabindex="-1" aria-labelledby="labelHapus<?= $X['kodeagama']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <form method="POST">
+                                      <div class="modal-header bg-danger text-white">
+                                        <h5 class="modal-title" id="labelHapus<?= $X['kodeagama']; ?>">Konfirmasi Hapus</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <p>Yakin ingin menghapus data berikut?</p>
+                                        <ul>
+                                          <li><strong>Kode:</strong> <?= $X['kodeagama']; ?></li>
+                                          <li><strong>Nama:</strong> <?= $X['namaagama']; ?></li>
+                                        </ul>
+                                        <input type="hidden" name="kodeagama" value="<?= $X['kodeagama']; ?>">
+                                        <input type="hidden" name="hapus_agama" value="1">
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
 <?php else: ?>
 <!-- Jika user adalah siswa, tampilkan pesan atau tombol view saja -->
 <span class="text-muted">View Only</span>

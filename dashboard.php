@@ -33,17 +33,19 @@ while($row = mysqli_fetch_assoc($q_gender)) {
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>AdminLTE v4 | Dashboard</title>
+  <title>Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="AdminLTE is a Free Bootstrap 5 Admin Dashboard" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="dist/css/adminlte.css" />
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- jQuery (diperlukan untuk dropdown) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
 <?php include "navbar.php"; ?>
+  <div class="wrapper">
 <?php include "sidebar.php"; ?>
 <div class="content-wrapper">
   <main class="app-main">
@@ -105,7 +107,7 @@ while($row = mysqli_fetch_assoc($q_gender)) {
                 <p>Lihat data anda!</p>
               </div>
               <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-              <a href="#" class="small-box-footer">More info <i class="bi bi-link-45deg"></i></a>
+              <a href="profile.php" class="small-box-footer">More info <i class="bi bi-link-45deg"></i></a>
             </div>
           </div>
         </div>
@@ -166,26 +168,23 @@ while($row = mysqli_fetch_assoc($q_gender)) {
                   </div>
                 </div>
               </div>
-              <!-- Feed Berita Sekolah -->
-
-
             </div>
           </div>
+          
           <div class="col-12 mt-4">
-  <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">
-        <i class="bi bi-newspaper me-1"></i>
-        Berita Terbaru dari Website Sekolah
-      </h3>
-    </div>
-    <div class="card-body">
-      <!-- Feed RSS -->
-     <iframe src="https://smkn6solo.sch.id/category/berita/" width="100%" height="600" style="border:none;"></iframe>
-
-    </div>
-  </div>
-</div>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="bi bi-newspaper me-1"></i>
+                  Berita Terbaru dari Website Sekolah
+                </h3>
+              </div>
+              <div class="card-body">
+                <!-- Feed RSS -->
+               <iframe src="https://smkn6solo.sch.id/category/berita/" width="100%" height="600" style="border:none;"></iframe>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -203,6 +202,7 @@ while($row = mysqli_fetch_assoc($q_gender)) {
 </footer> 
 </div>
 
+<!-- Bootstrap JS harus dimuat SEBELUM AdminLTE -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="dist/js/adminlte.js"></script>
 
@@ -255,6 +255,55 @@ const genderChart = new Chart(genderCtx, {
             }
         }
     }
+});
+
+// Script untuk memastikan dropdown berfungsi
+$(document).ready(function() {
+    console.log('Dashboard loaded, initializing dropdown...');
+    
+    // Force initialize all dropdowns
+    $('.dropdown-toggle').each(function() {
+        if (!$(this).attr('data-bs-toggle')) {
+            $(this).attr('data-bs-toggle', 'dropdown');
+        }
+    });
+    
+    // Manual dropdown handler
+    $('.dropdown-toggle').off('click').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log('Dropdown clicked');
+        
+        const $parent = $(this).parent('.dropdown');
+        const $menu = $parent.find('.dropdown-menu');
+        
+        // Close all other dropdowns
+        $('.dropdown-menu').not($menu).removeClass('show');
+        $('.dropdown-toggle').not(this).attr('aria-expanded', 'false');
+        
+        // Toggle this dropdown
+        if ($menu.hasClass('show')) {
+            $menu.removeClass('show');
+            $(this).attr('aria-expanded', 'false');
+        } else {
+            $menu.addClass('show');
+            $(this).attr('aria-expanded', 'true');
+        }
+    });
+    
+    // Close dropdown when clicking outside
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.dropdown').length) {
+            $('.dropdown-menu').removeClass('show');
+            $('.dropdown-toggle').attr('aria-expanded', 'false');
+        }
+    });
+    
+    // Prevent dropdown from closing when clicking inside
+    $('.dropdown-menu').on('click', function(e) {
+        e.stopPropagation();
+    });
 });
 </script>
 

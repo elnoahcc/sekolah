@@ -67,21 +67,7 @@ if (isset($_POST['simpan'])) {
                   <li class="breadcrumb-item active" aria-current="page">Tambah Data Siswa</li>
                 </ol>
               </div>
-              <div class="col-12">
-                <div class="callout callout-info">
-                  Mohon isi data dengan benar dan lengkap.
-                  <br />
-                  <strong>Note:</strong> Formulir ini menggunakan
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/forms/overview/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="callout-link"
-                  >
-                    Bootstrap Form
-                  </a>
-                </div>
-              </div>
+              
             </div>
             <div class="card card-info card-outline mb-4">
   <!--begin::Header-->

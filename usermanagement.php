@@ -214,7 +214,7 @@ $result = $query->get_result();
             <?php if ($result->num_rows > 0): ?>
             <div class="table-responsive">
               <table class="table table-bordered table-hover">
-                <thead class="table-light">
+                <thead class="table table-striped">
                   <tr>
                     <th style="width: 50px;">#</th>
                     <th>Username</th>
@@ -352,7 +352,7 @@ $result = $query->get_result();
             <label for="edit_role" class="form-label">Role <span class="text-danger">*</span></label>
             <select class="form-select" id="edit_role" name="role" required>
               <option value="admin">Admin</option>
-              <option value="user">User</option>
+              <option value="siswa">Siswa</option>
             </select>
             <div id="edit_role_warning" class="form-text text-warning" style="display: none;">
               <i class="bi bi-exclamation-triangle"></i> Anda sedang mengedit akun Anda sendiri

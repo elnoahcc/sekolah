@@ -156,7 +156,7 @@ $total_pages = ceil($total_data / $limit);
               <div class="card-body p-0">
                 <div class="table-responsive">
                   <table class="table table-striped table-hover">
-                    <thead class="table-success">
+                    <thead class="table table-striped">
                       <tr>
                         <th style="width: 50px">No.</th>
                         <th>NISN</th>

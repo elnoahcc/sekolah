@@ -146,6 +146,13 @@ public function update_data_jurusan($kodejurusan, $namajurusan) {
             return false; // Update failed
         }
     }
+
+public function hapus_data_agama($kodeagama) {
+        $stmt = $this->koneksi->prepare("DELETE FROM kodeagama WHERE kodeagama = ?");
+        $stmt->bind_param("s", $kodeagama);
+        $stmt->execute();
+        $stmt->close();
+    }
 // Tambahkan method-method ini ke dalam class database() di file koneksi.php
 
 // Method untuk menampilkan data siswa dengan filter dan pagination (menggunakan MySQLi)
