@@ -1,63 +1,78 @@
-# Hi there, I'm Elnoah! 👋
+# 🚀 CRUD SEKOLAH SMK NEGERI 6 SURAKARTA
 
-Welcome to my GitHub profile! I'm a passionate developer with a love for coding and all things tech. Here's a little bit about me:
+A modern, responsive web application with comprehensive user management and data visualization features.
 
-- 🔭 I’m currently working on various open-source projects.
-- 🌱 I’m constantly learning and exploring new technologies.
-- 👯 I’m looking to collaborate on exciting and innovative projects.
-- 🤔 I’m open to discussing and solving complex coding challenges.
-- 💬 Ask me about anything tech-related!
-- 📫 How to reach me: [Email](mailto:elnoahcc@example.com)
-- 😄 Pronouns: He/Him
-- ⚡ Fun fact: I love playing the guitar and hiking in my free time.
+## ✨ Features
 
-## My GitHub Stats
+- **📊 Interactive Dashboard** - Real-time data visualization and analytics
+- **👥 User Management** - Complete user administration system
+- **📝 Form Management** - Dynamic form creation and handling
+- **👤 User Profiles** - Personalized user profile management
+- **🔐 Authentication** - Secure login/logout system
+- **📋 Terms & Conditions** - Built-in legal compliance
 
-![Elnoah's GitHub Stats](https://github-readme-stats.vercel.app/api?username=elnoahcc&show_icons=true&theme=radical)
+## 🖼️ Screenshots
 
-## Top Languages
+<div align="center">
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=elnoahcc&layout=compact&theme=radical)
+| Dashboard | Data Management | Forms |
+|:---------:|:---------------:|:-----:|
+| ![Dashboard](https://github.com/user-attachments/assets/3f68aca9-1680-4d3b-a980-b033e63232e6) | ![Data](https://github.com/user-attachments/assets/8d734418-45d3-4446-a6c2-bfa63734aaa2) | ![Forms](https://github.com/user-attachments/assets/5a8e2fc0-dd40-4541-9a83-7c63d801f6fa) |
 
-## Connect with Me
+| Profile Management | User Administration | Authentication |
+|:------------------:|:-------------------:|:--------------:|
+| ![Profile](https://github.com/user-attachments/assets/614f310a-6995-46a1-8bb4-742682242d03) | ![User Mgmt](https://github.com/user-attachments/assets/13072fcd-6017-451c-bb6a-30641c461b2e) | ![Login](https://github.com/user-attachments/assets/149f3fda-c7bf-452e-b42d-e4ce1927e341) |
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/elnoahcc/)
-[![Twitter](https://img.shields.io/badge/Twitter-Follow-blue)](https://twitter.com/elnoahcc)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-blue)](https://github.com/elnoahcc)
+| Logout Confirmation | Terms & Conditions | Exit Validation |
+|:-------------------:|:------------------:|:---------------:|
+| ![Logout](https://github.com/user-attachments/assets/3e7a7de8-f41b-4ea3-b49f-13ba5e0ddbbf) | ![Terms](https://github.com/user-attachments/assets/6e0990e3-b714-4941-a895-0f433a1d4121) | ![Validation](https://github.com/user-attachments/assets/b76ad696-68ad-4c5a-beb0-a209d13147d7) |
 
-Thanks for visiting my profile! Have a great day! 😊
+</div>
 
-<h3>Dashboard</h3>
+## 🛠️ Tech Stack
 
-![image](https://github.com/user-attachments/assets/3f68aca9-1680-4d3b-a980-b033e63232e6)
+- Frontend: Modern web technologies
+- Backend: Secure server architecture
+- Database: Efficient data management
+- Authentication: Robust security system
 
-<h3>Page Data</h3>
+## 🚀 Quick Start
 
-![image](https://github.com/user-attachments/assets/8d734418-45d3-4446-a6c2-bfa63734aaa2)
+```bash
+# Clone the repository
+git clone https://github.com/elnoahcc/your-repo-name.git
 
-<h3>Page Form</h2>
-![image](https://github.com/user-attachments/assets/5a8e2fc0-dd40-4541-9a83-7c63d801f6fa)
+# Navigate to project directory
+cd your-repo-name
 
-<h3>Page Profile</h3>
-![image](https://github.com/user-attachments/assets/614f310a-6995-46a1-8bb4-742682242d03)
+# Install dependencies
+npm install
 
-<h3>Page User Management</h3>
-![image](https://github.com/user-attachments/assets/13072fcd-6017-451c-bb6a-30641c461b2e)
+# Start development server
+npm start
+```
 
-<h3>Page Logout</h3>
-![image](https://github.com/user-attachments/assets/3e7a7de8-f41b-4ea3-b49f-13ba5e0ddbbf)
+## 📱 Key Pages
 
-<h3>Page Login</h3>
-![image](https://github.com/user-attachments/assets/149f3fda-c7bf-452e-b42d-e4ce1927e341)
+| Page | Description |
+|------|-------------|
+| Dashboard | Main analytics and overview |
+| Data Management | CRUD operations for data |
+| Forms | Dynamic form handling |
+| User Profile | Personal account management |
+| Admin Panel | User administration tools |
 
-<h3>Page Syarat & Ketentuan</h3>
-![image](https://github.com/user-attachments/assets/6e0990e3-b714-4941-a895-0f433a1d4121)
+## 🤝 Contributing
 
+Contributions are welcome! Feel free to submit issues and pull requests.
 
+## 📧 Contact
 
+**Elnoah** - [elnoahcc@example.com](mailto:elnoahcc@example.com)
 
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/elnoahcc/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/elnoahcc)
 
+---
 
-
-
-
+⭐ **Star this repository if you found it helpful!**
